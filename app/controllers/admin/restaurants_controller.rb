@@ -16,7 +16,7 @@ class Admin::RestaurantsController < ApplicationController
       flash[:notice] = "restaurant was successfully created"
       redirect_to admin_restaurants_path
     else
-      flash[:notice] = "restaurant was failed to create"
+      flash[:alert] = "restaurant was failed to create"
       render :new
     end
   end
