@@ -5,6 +5,7 @@
     </div>
   </div>
   <div class="col-md-4">
+    <%= @restaurant.category.name %>
     <%= image_tag @restaurant.image.url, width: '600px', class: "img-responsive center-block" if @restaurant.image? %>
     <br>
     <div class="well">
