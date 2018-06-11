@@ -14,12 +14,18 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  # def default_url(*args)
-  #   # For Rails 3.1+ asset pipeline compatibility:
-  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  #
+  def default_url(*args)
+    # For Rails 3.1+ asset pipeline compatibility:
+  #  ActionController::Base.helpers.asset_path("image/" + [version_name, "default.jpeg"].compact.join('_'))  #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  # end
+  #{"restaurant_100.jpeg"}
+    "fallback/#{rand(3)}.jpg"
+  #  if rand(100)%2 == 0
+  #    "https://visualhunt.com/photos/1/table-with-spinach-and-beetroot-salad-with-sauce.jpg"
+  #  else
+  #    "https://tw.alphacamp.co/wp-content/uploads/2014/07/alpha-logo-long.png"
+  #  end
+  end
 
   # Process files as they are uploaded:
   # process scale: [200, 300]
