@@ -23,6 +23,18 @@
     <%= link_to 'Back to index', admin_restaurants_path %>
   </div>
 
+  <!-- Show Existing Comments -->
+  <% @restaurant.comments.each do |comment| %>
+  <div>
+    <h4><%= comment.user.email.split('@').first %></h4>
+    <p><%= simple_format comment.content %></p>
+    <p class="text-muted">
+      <em><%= time_ago_in_words(comment.created_at) %></em>
+    </p>
+  </div>
+  <hr>
+  <% end %>
+
   <!-- Add Comments by Users -->
   <div class="row">
     <% if @comment.errors.any? %>
