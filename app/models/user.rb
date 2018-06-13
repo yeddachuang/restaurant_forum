@@ -3,8 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :comments
+  validates_presence_of :name
   mount_uploader :image, AvatarUploader
+
+  has_many :comments
   def admin?
     self.role == "admin"
   end
