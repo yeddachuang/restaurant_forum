@@ -22,3 +22,19 @@
   float: none;
   display: inline-block;
 }
+
+.my-restaurant {
+  display: inline-block;
+  text-align: center;
+  padding: 7px 7px 0 7px;
+//  height: 150px;
+//  padding: 0 15px;
+}
+
+.my-restaurant > div {
+  height: 60px;
+}
+
+.my-restaurant img{
+  max-height: 100%;
+}
