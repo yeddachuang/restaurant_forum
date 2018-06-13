@@ -25,7 +25,7 @@ namespace :dev do
         password: FFaker::InternetSE.password,
         role: nil)
     end
-    User.create(email: "yedda@yedda.com", password: "yeddaa", role: "admin")
+    User.create(name: "Yedda", intro: "I love Taiwan!", email: "yedda@yedda.com", password: "yeddaa", role: "admin")
     puts "have created fake users"
     puts "now you have #{User.count} users data (#{User.first.id} ~ #{User.last.id})"
   end
