@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <% if @user.errors.any? %>
+      <h4>We have some errors here !</h4>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+      <hr>
+    <% end %>
+    <h1>Edit Profile</h1>
+    <%= form_for @user do |f| %>
+      <div class="form-group">
+        <%= f.label :name, "Name" %>
+        <%= f.text_field :name %>
+      </div>
+      <div class="form-group">
+        <%= f.label :intro, "自我介紹" %>
+        <%= f.text_field :intro %>
+      </div>
+      <div class="form-group">
+        <%= f.label :image, "大頭照上傳" %>
+        <%= image_tag @user.image, width: '300px' if @user.image? %>
+        <%= f.file_field :image %>
+      </div>
+      <div class="form-group">
+        <%= f.submit %>
+      </div>
+    <% end %>
+  </div>
+</div>
