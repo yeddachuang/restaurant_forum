@@ -20,8 +20,10 @@ namespace :dev do
 
     20.times do |i|
       User.create!(email: FFaker::Internet.email,
-         password: "12345678",
-         role: nil)
+        name: FFaker::Name.first_name,
+        intro: FFaker::Lorem.paragraphs,
+        password: FFaker::InternetSE.password,
+        role: nil)
     end
     User.create(email: "yedda@yedda.com", password: "yeddaa", role: "admin")
     puts "have created fake users"
@@ -31,11 +33,11 @@ namespace :dev do
     task fake_comment: :environment do
       Comment.destroy_all
 
-      Restaurant.count.times do |i|
-        3.times do |j|
+      Restaurant.all.each do |restaurant|
+        3.times do |i|
           Comment.create!(content: FFaker::Lorem.paragraphs,
-            restaurant_id: Restaurant.find_by(id: (Restaurant.first.id + i)).id,
-            user_id: User.find_by(id: (User.first.id + rand(User.count))).id
+            restaurant_id: restaurant.id,
+            user_id: User.all.sample.id
           )
         end
       end
