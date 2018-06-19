@@ -5,8 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   validates_presence_of :name
   mount_uploader :image, AvatarUploader
-  has_many :comments, dependent: :destroy
+  # Users has many commented restaurants
+  has_many :comments, dependent: :restrict_with_error
   has_many :restaurants, through: :comments
+  # Users has many favorited restaurants
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_restaurants, through: :favorites, source: :restaurant
 
   def admin?
     self.role == "admin"
