@@ -4,6 +4,16 @@ Rails.application.routes.draw do
 
   resources :restaurants, only: [:index, :show] do
     resources :comments, only: [:create, :destroy]
+
+    # information of all restaurants
+    collection do
+      get :feeds
+    end
+
+    # information of single restaurant
+    member do
+      get :dashboard
+    end
   end
   root "restaurants#index"
 
