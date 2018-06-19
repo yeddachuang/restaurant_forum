@@ -17,7 +17,8 @@
       </div>
     </div>
     <div class="col-md-8">
-      <%= simple_format @restaurant.description %>
+      <p><%= simple_format @restaurant.description %></p>
+      <%= link_to "Dashboard", dashboard_restaurant_path(@restaurant), class: "btn btn-primary" %>
     </div>
 
     <div class="clearfix"></div>
@@ -28,6 +29,9 @@
 
     </div>
 </div>
+
+<!-- Comments Part -->
+
 <div class="container">
   <div class="row">
     <!-- Show Existing Comments -->
