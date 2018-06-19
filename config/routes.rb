@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     # information of single restaurant
     member do
       get :dashboard
+      post :favorite
+      post :unfavorite
     end
   end
   root "restaurants#index"
