@@ -1,20 +1,44 @@
-<h1>餐廳最新動態</h1>
+<div class="container">
+  <div class="row">
+    <!-- Nav-tabs -->
+    <nav class="nav nav-tabs">
+      <li role="presentation">
+        <%= link_to "首頁", restaurants_path %>
+      </li>
+      <li role="presentation" class="active">
+        <%= link_to "最新動態", feeds_restaurants_path %>
+      </li>
+    </nav>
+  </div>
 
-<div>
-  <h3>最新餐廳</h3>
-  <% @recent_restaurants.each do |restaurant| %>
-  <h4><%= link_to restaurant.name, restaurant_path(restaurant) %></h4>
-  <p><%= restaurant.category.name %></p>
-  <p><%= restaurant.description %></p>
-  <% end %>
-</div>
+  <div class="row">
+    <h1>餐廳最新動態</h1>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default my-feeds">
+      <div class="panel-heading">最新餐廳</div>
+      <div class="panel-body">
+        <% @recent_restaurants.each do |restaurant| %>
+        <h4><%= link_to restaurant.name, restaurant_path(restaurant) %></h4>
+        <p class="label label-default"><%= restaurant.category.name %></p>
+        <p><%= truncate(restaurant.description, length: 160) %></p>
+        <hr>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default my-feeds">
+      <div class="panel-heading">最新評論</div>
+      <div class="panel-body">
+        <% @recent_comments.each do |comment| %>
+        <h4><%= link_to comment.restaurant.name, restaurant_path(comment.restaurant) %></h4>
 
-<div>
-  <h3>最新評論</h3>
-  <% @recent_comments.each do |comment| %>
-  <h4><%= link_to comment.restaurant.name, restaurant_path(comment.restaurant) %></h4>
-  <p><%= comment.content %></p>
-  <p><%= link_to comment.user.name, user_path(comment.user) %></p>
-  <hr>
-  <% end %>
+        <p><%= truncate(comment.content, length: 160) %>
+        by <%= link_to comment.user.name, user_path(comment.user) %></p>
+        <hr>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
