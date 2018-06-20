@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       post :unfavorite
       post :like
       post :unlike
+      post :ranking
     end
   end
   root "restaurants#index"
