@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <!-- Nav-tabs -->
+    <nav class="nav nav-tabs">
+      <li role="presentation">
+        <%= link_to "首頁", restaurants_path %>
+      </li>
+      <li role="presentation">
+        <%= link_to "最新動態", feeds_restaurants_path %>
+      </li>
+      <li role="presentation" class="active">
+        <%= link_to "TOP10人氣餐廳", ranking_restaurants_path %>
+      </li>
+    </nav>
+  </div>
+
+  <div class="row">
+    <h1>TOP10人氣餐廳</h1>
+    <h4>（收藏數最高）</h4>
+  </div>
+  <div class="row">
+    <div class="panel panel-default my-feeds">
+      <div class="panel-body">
+        <% @top_restaurants.each do |restaurant| %>
+        <div>
+          <h4><%= link_to restaurant.name, restaurant_path(restaurant) %></h4>
+          <p class="label label-default">收藏數：<%= restaurant.favorites_count %></p>
+          <p><%= truncate(restaurant.description, length: 160) %></p>
+          <p class="label label-default">Show</p>
+          <%= render partial: "shared/favorite", locals: {restaurant: restaurant} %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
