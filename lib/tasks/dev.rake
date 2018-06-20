@@ -56,8 +56,6 @@ namespace :dev do
           Favorite.create!(restaurant_id: restaurant.id,
             user_id: user.id
           )
-          restaurant.favorited_inc
-          restaurant.save
         end
       end
     end
