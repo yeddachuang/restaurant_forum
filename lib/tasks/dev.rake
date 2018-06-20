@@ -8,7 +8,8 @@ namespace :dev do
         tel: FFaker::PhoneNumber.short_phone_number,
         address: FFaker::Address.street_address,
         description: FFaker::Lorem.paragraph,
-        category: Category.all.sample
+        category: Category.all.sample,
+        favorites_count: 0
       )
     end
     puts "have created fake restaurants"
@@ -55,6 +56,8 @@ namespace :dev do
           Favorite.create!(restaurant_id: restaurant.id,
             user_id: user.id
           )
+          restaurant.favorited_inc
+          restaurant.save
         end
       end
     end
