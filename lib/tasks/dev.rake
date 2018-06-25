@@ -80,6 +80,21 @@ namespace :dev do
     puts "now you have #{Like.count} comments data (#{Like.first.id} ~ #{Like.last.id})"
   end
 
+  task fake_follow: :environment do
+    Followship.destroy_all
+
+    User.all.each do |user|
+      User.all.count.times do |i|
+        following = User.all.sample
+        if !user.following?(following)
+          user.followships.create!(following_id: following.id)
+        end
+      end
+    end
+    puts "have created fake followings"
+    puts "now you have #{Followship.count} following relationship (#{Followship.first.id} ~ #{Followship.last.id})"
+  end
+
   task fake_all: :environment do
     #Rake::Task['db:migrate'].execute
     #Rake::Task['db:seed'].execute
@@ -93,6 +108,8 @@ namespace :dev do
     Rake::Task['dev:fake_favorite'].execute
     puts "fake_like processing..."
     Rake::Task['dev:fake_like'].execute
+    puts "fake_follow processing..."
+    Rake::Task['dev:fake_follow'].execute
     #看還有甚麼fake都能放進來
   end
 
