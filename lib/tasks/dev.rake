@@ -84,7 +84,7 @@ namespace :dev do
     Followship.destroy_all
 
     User.all.each do |user|
-      User.all.count.times do |i|
+      rand(User.all.count).times do |i|
         following = User.all.sample
         if !user.following?(following)
           user.followships.create!(following_id: following.id)
@@ -93,6 +93,23 @@ namespace :dev do
     end
     puts "have created fake followings"
     puts "now you have #{Followship.count} following relationship (#{Followship.first.id} ~ #{Followship.last.id})"
+  end
+
+  task fake_friend: :environment do
+    Friendship.destroy_all
+
+    User.all.each do |user|
+      rand(User.all.count).times do |i|
+        friend = User.all.sample
+        if !user.friend?(friend)
+          #user.friends.create!(friend_id: friend.id, status: 1)
+          Friendship.create!(user_id: user.id, friend_id: friend.id, status: 1)
+          puts "new friendship"
+        end
+      end
+    end
+    puts "have created fake friendships"
+    puts "now you have #{Friendship.count} friendships (#{Friendship.first.id} ~ #{Friendship.last.id})"
   end
 
   task fake_all: :environment do

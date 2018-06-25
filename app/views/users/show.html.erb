@@ -26,6 +26,22 @@
   <div class="col-md-4">
     <div class="panel panel-default ">
       <div class="panel-heading">
+        <strong><%= @friends.uniq.count %></strong> friends
+      </div>
+      <div class="panel-group">
+        <% @friends.each do |friends| %>
+          <%= link_to(friends) do %>
+            <div class="my-followships">
+              <%= image_tag friends.image.url, class: "img-responsive img-circle" %>
+              <strong><%= friends.name %></strong>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="panel panel-default ">
+      <div class="panel-heading">
         <strong><%= @followings.uniq.count %></strong> followings
       </div>
       <div class="panel-group">
