@@ -23,7 +23,7 @@
           <div><%= image_tag user.image.url, class: "img-responsive img-rounded center-block" %></div>
           <div><h3><%= link_to user.name, user_path(user) %></h3></div>
           <div><%= render partial: "shared/follow", locals: {user: user} %></div>
-          <div><%= render partial: "shared/follow", locals: {user: user} %></div>
+          <div><%= render partial: "shared/friend", locals: {user: user} %></div>
         </div>
       </div>
       <% end %>
