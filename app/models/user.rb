@@ -30,6 +30,11 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
+  # Users added as friends by many user
+  has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id"
+  has_many :friended, through: :inverse_friendships, source: :user
+
+
   def admin?
     self.role == "admin"
   end
