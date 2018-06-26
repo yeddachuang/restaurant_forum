@@ -38,8 +38,8 @@ class UsersController < ApplicationController
     @followers = @user.followers
     @friends = @user.friends
     #@user = User.find(params[:id])
-    @friends_sent = @user.friends#Friendship.where(user_id: params[:id])
-    @friends_received = @user.friended#Friendship.where(friend_id: params[:id])
+    @friends_sent = @user.friends.order("name")#Friendship.where(user_id: params[:id])
+    @friends_received = @user.friended.order("name")#Friendship.where(friend_id: params[:id])
   end
 
   private

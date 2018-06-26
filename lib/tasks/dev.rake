@@ -18,15 +18,16 @@ namespace :dev do
 
   task fake_user: :environment do
     User.destroy_all
+    User.create(name: "Yedda", intro: "I love Taiwan!", email: "yedda@yedda.com", password: "yeddaa", role: "admin")
 
     50.times do |i|
       User.create!(email: FFaker::Internet.email,
         name: FFaker::Name.first_name,
         intro: FFaker::Lorem.paragraphs,
-        password: FFaker::InternetSE.password,
+        password: 123456,
         role: nil)
     end
-    User.create(name: "Yedda", intro: "I love Taiwan!", email: "yedda@yedda.com", password: "yeddaa", role: "admin")
+
     puts "have created fake users"
     puts "now you have #{User.count} users data (#{User.first.id} ~ #{User.last.id})"
   end
@@ -113,8 +114,8 @@ namespace :dev do
   end
 
   task fake_all: :environment do
-    #Rake::Task['db:migrate'].execute
-    #Rake::Task['db:seed'].execute
+    Rake::Task['db:migrate'].execute
+    Rake::Task['db:seed'].execute
     puts "fake_restaurant processing..."
     Rake::Task['dev:fake_restaurant'].execute
     puts "fake_user processing..."
