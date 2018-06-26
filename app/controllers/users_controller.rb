@@ -30,6 +30,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def friend_list
+    @user = User.find(params[:id])
+    @commented_restaurants = @user.restaurants
+    @favorited_restaurants = @user.favorited_restaurants
+    @followings = @user.followings
+    @followers = @user.followers
+    @friends = @user.friends
+    #@user = User.find(params[:id])
+    @friends_sent = @user.friends#Friendship.where(user_id: params[:id])
+    @friends_received = @user.friended#Friendship.where(friend_id: params[:id])
+  end
+
   private
 
   def user_params

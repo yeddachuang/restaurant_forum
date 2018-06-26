@@ -1,0 +1,93 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= image_tag @user.image.url, class: "img-responsive" %>
+    </div>
+    <div class="col-md-8">
+      <h1><%= @user.name %></h1>
+      <p><strong><%= @user.email %></strong></p>
+      <p><strong><%= @commented_restaurants.uniq.count %></strong> 已評論餐廳
+        <strong><%= @favorited_restaurants.uniq.count %></strong> 收藏的餐廳
+        <strong><%= @followings.uniq.count %></strong> followings
+        <strong><%= @followers.uniq.count %></strong> followers
+      </p>
+      <p><%= @user.intro %></p>
+      <%= link_to 'Edit Profile', edit_user_path, class: "btn btn-primary" if current_user == @user%>
+      <%= link_to 'My Friends', friend_list_user_path(@user), class: "btn btn-primary" if current_user == @user%>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="clearfix"></div>
+
+<div class="container">
+  <div class="col-md-4">
+    <div class="panel panel-default ">
+      <div class="panel-heading"> Sent friend invitation </div>
+      <div class="panel-group">
+        <table class="table-condensed">
+          <% @friends_sent.each do |friends| %>
+            <% if !@user.friended?(friends) %>
+              <tr class="my-followships">
+                <td><%= image_tag friends.image.url, class: "img-responsive img-circle" %></td>
+                <td><%= link_to(friends) do %><strong><%= friends.name %></strong><% end %></td>
+                <td>
+                  <% if @user == current_user %>
+                    <%= render partial: "shared/friend", locals: {user: friends} %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default ">
+      <div class="panel-heading"> Recieved friend invitation </div>
+      <div class="panel-group">
+        <table class="table-condensed">
+          <% @friends_received.each do |friends| %>
+            <% if !@user.friend?(friends) %>
+              <tr class="my-followships">
+                <td><%= image_tag friends.image.url, class: "img-responsive img-circle" %></td>
+                <td><%= link_to(friends) do %><strong><%= friends.name %></strong><% end %></td>
+                <td>
+                  <% if @user == current_user %>
+                    <%= render partial: "shared/friend", locals: {user: friends} %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading"> Friends </div>
+      <div class="panel-group">
+        <table class="table-condensed">
+          <% @friends_sent.each do |friends| %>
+            <% if @user.friended?(friends) %>
+              <tr class="my-followships">
+                <td><%= image_tag friends.image.url, class: "img-responsive img-circle" %></td>
+                <td><%= link_to(friends) do %><strong><%= friends.name %></strong><% end %></td>
+                <td>
+                  <% if @user == current_user %>
+                    <%= render partial: "shared/friend", locals: {user: friends} %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

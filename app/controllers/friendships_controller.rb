@@ -21,10 +21,4 @@ class FriendshipsController < ApplicationController
     end
     redirect_back(fallback_location: root_path)
   end
-
-  def all_friends
-    @friends_sent = current_user.friendships.where(user_id: params[:id])
-    @friends_received = current_user.friendships.where(friend_id: params[:id])
-    @friends_set = current_user.friendships.where(status: 2)
-  end
 end

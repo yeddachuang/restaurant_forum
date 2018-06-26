@@ -46,4 +46,13 @@ class User < ApplicationRecord
   def friend?(user)
     self.friends.include?(user)
   end
+
+  def friended?(user)
+    self.friended.include?(user)
+  end
+
+  def isfriend?(user)
+    friend?(user) & friended?(user)
+  end
+
 end

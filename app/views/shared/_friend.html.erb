@@ -1,7 +1,15 @@
 <% if user != current_user %>
-  <% if current_user.friend?(user) %>
+  <% if current_user.isfriend?(user) %>
     <%= link_to "Unfriend", friendship_path(user), method: :delete, class: "btn btn-link" %>
   <% else %>
-    <%= link_to "Friend", friendships_path(:friend_id => user), method: :post, class: "btn btn-default" %>
-  <%end%>
+    <% if current_user.friended?(user) %>
+      <%= link_to "Accept", friendships_path(:friend_id => user), method: :post, class: "btn btn-default" %>
+    <% else %>
+      <% if current_user.friended?(user) %>
+        <%= link_to "Unsend", friendships_path(:friend_id => user), method: :post, class: "btn btn-default" %>
+      <% else %>
+        <%= link_to "Add Friend", friendships_path(:friend_id => user), method: :post, class: "btn btn-default" %>
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>
